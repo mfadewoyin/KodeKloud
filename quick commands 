@@ -1,0 +1,24 @@
+kubectl get nodes 
+kubectl run Nginx --image=Nginx
+kubectl get pods -o wide 
+kubectl describe pods
+
+kubectl create -f pods.yaml
+kubectl apply -f  pods.yaml
+kubectl replace -f replicaset.yaml
+kubectl scale  --replicaset=6 -f replicaset.yaml
+kubectl scale  --replicaset=6 -f replicset myapp-replicaset
+kubectl rollout undo deployment/Nginx-deployment
+kubectl get all
+kubectl create deployment httpd-frontend --replicas=3  --image=httpd:2.4-alpine
+kubectl rollout status deployment/myapp-deployment
+kubectl rollout history  deployment/myapp-deployment
+##deployment strategy
+# 1.Recreate strategy
+# 2. Rolling update 
+
+kubectl set image  deployment/myapp-deployment Nginx=Nginx
+kubectl rollout undo deployment/myapp-deployment
+kubectl create -f deployment.yaml --record
+minikube service myapp-service --url
+kubectl expose deployment simple-webapp --name= --type= --target-port --port= --dry-run=client -o yaml> smapledeployment.yaml
